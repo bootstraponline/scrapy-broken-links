@@ -29,12 +29,10 @@ class LinkSpiderSpider(CrawlSpider):
     )
 
 def parse_item(self, response):
-    items = []
-
+    self.log('----------------- Parsing: %s' % response.url)
     item = BrokenLinksItem()
     item['url'] = response.url
     item['status'] = response.status
     item['parent'] = response.request.url
 
-    items.append(item)
-    return items
+    yield item

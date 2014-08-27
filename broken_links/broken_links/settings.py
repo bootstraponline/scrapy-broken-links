@@ -12,12 +12,3 @@ BOT_NAME = 'broken_links'
 
 SPIDER_MODULES = ['broken_links.spiders']
 NEWSPIDER_MODULE = 'broken_links.spiders'
-
-# Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'broken_links (+http://www.yourdomain.com)'
-
-# limit crawling to allowed domains only
-# http://doc.scrapy.org/en/latest/topics/spider-middleware.html#scrapy.contrib.spidermiddleware.offsite.OffsiteMiddleware
-SPIDER_MIDDLEWARES = {
-    'scrapy.contrib.spidermiddleware.offsite.OffsiteMiddleware': 999,
-}
