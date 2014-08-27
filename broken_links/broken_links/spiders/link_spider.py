@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
+from scrapy import log
 from scrapy.contrib.linkextractors import LinkExtractor
 from scrapy.contrib.spiders import CrawlSpider, Rule
 
@@ -29,7 +30,7 @@ class LinkSpiderSpider(CrawlSpider):
     )
 
 def parse_item(self, response):
-    self.log('----------------- Parsing: %s' % response.url)
+    log.msg('------------------------------- Parsing: %s' % response.url, level=log.INFO)
     item = BrokenLinksItem()
     item['url'] = response.url
     item['status'] = response.status
