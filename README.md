@@ -1,4 +1,6 @@
-scrapy-broken-links
-===================
+# scrapy-broken-links
 
-A Scrapy crawler that does two things: 1) returns a list of broken links and the parent page 2) returns a list of valid links
+A [Scrapy crawler](https://github.com/scrapy/scrapy) that does two things:
+
+0. returns a list of broken links and the parent page
+0. returns a list of valid links
