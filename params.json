@@ -1,0 +1,1 @@
+{"name":"Scrapy-broken-links","tagline":"A Scrapy crawler for broken & valid links","body":"\r\n- [valid link](http://www.github.com)\r\n- [broken link](http://www.github.com/broken/broken_link)","google":"","note":"Don't delete this file! It's used internally to help with page regeneration."}
