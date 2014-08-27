@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import scrapy
 from broken_links.items import BrokenLinksItem
+from urlparse import urlparse
 
 # scrapy runspider link_spider.py
 #
@@ -22,4 +23,6 @@ class LinkSpiderSpider(scrapy.Spider):
         item['parent'] = response.request.url
         # from http://doc.scrapy.org/en/latest/topics/spiders.html#topics-spiders
         for url in response.xpath('//a/@href').extract():
-            yield scrapy.Request(url, callback=self.parse)
+            # ensure url has a valid scheme before attempting to crawl it.
+            if urlparse(url).scheme != '':
+                yield scrapy.Request(url, callback=self.parse)
