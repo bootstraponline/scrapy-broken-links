@@ -26,14 +26,14 @@ class LinkSpiderSpider(CrawlSpider):
     # http://doc.scrapy.org/en/latest/topics/spiders.html#scrapy.contrib.spiders.Rule
     rules = (
         Rule(LinkExtractor(allow_domains=[target_domain], unique=True), callback='parse_item', follow=True),
-        Rule(LinkExtractor(deny_domains=[target_domain],  unique=True), callback='parse_item', follow=False),
+        Rule(LinkExtractor(deny_domains=[target_domain], unique=True), callback='parse_item', follow=False),
     )
 
-def parse_item(self, response):
-    log.msg('------------------------------- Parsing: %s' % response.url, level=log.INFO)
-    item = BrokenLinksItem()
-    item['url'] = response.url
-    item['status'] = response.status
-    item['parent'] = response.request.url
+    def parse_item(self, response):
+        log.msg('------------------------------- Parsing: %s' % response.url, level=log.INFO)
+        item = BrokenLinksItem()
+        item['url'] = response.url
+        item['status'] = response.status
+        item['parent'] = response.request.url
 
-    yield item
+        yield item
