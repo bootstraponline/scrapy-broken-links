@@ -13,4 +13,9 @@ BOT_NAME = 'broken_links'
 SPIDER_MODULES = ['broken_links.spiders']
 NEWSPIDER_MODULE = 'broken_links.spiders'
 
+# Allow saving non-200 status codes.
 HTTPERROR_ALLOW_ALL = True
+
+# Make sure the crawler doesn't cause problems for the servers.
+# http://doc.scrapy.org/en/latest/topics/autothrottle.html
+AUTOTHROTTLE_ENABLED = True
