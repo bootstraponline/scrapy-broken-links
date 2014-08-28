@@ -28,9 +28,19 @@ class LinkSpiderSpider(CrawlSpider):
     # http://doc.scrapy.org/en/latest/topics/link-extractors.html#topics-link-extractors
     # http://doc.scrapy.org/en/latest/topics/spiders.html#scrapy.contrib.spiders.Rule
     rules = (
-        Rule(LinkExtractor(allow_domains=[target_domain], unique=True), callback='parse_item', follow=True),
-        Rule(LinkExtractor(deny_domains=[target_domain], unique=True), callback='parse_item', follow=False),
+        Rule(LinkExtractor(allow_domains=[target_domain], unique=True), callback='parse_item', process_links='clean_links', follow=True),
+        Rule(LinkExtractor(deny_domains=[target_domain], unique=True), callback='parse_item', process_links='clean_links', follow=False),
     )
+
+    def clean_links(links):
+        cleaned = []
+        for link in links:
+            # remove html fragment (#) and query params (?)
+            link = link.split('#')[0].split('?')[0]
+            cleaned.append(link)
+
+        return cleaned
+
 
     def parse_item(self, response):
         log.msg('------------------------------- Parsing: %s' % response.url, level=log.INFO)
