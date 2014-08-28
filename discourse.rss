@@ -5,8 +5,28 @@
     <link>https://discuss.appium.io/latest</link>
     <description>Latest topics</description>
     
-      <lastBuildDate>Thu, 28 Aug 2014 19:05:21 -0400</lastBuildDate>
+      <lastBuildDate>Thu, 28 Aug 2014 19:15:21 -0400</lastBuildDate>
       <atom:link href="https://discuss.appium.io/latest.rss" rel="self" type="application/rss+xml" />
+        <item>
+          <title>Appium Job postings</title>
+          <author>no-reply@example.com (@jonahss Jonah)</author>
+          <category>News</category>
+          <description><![CDATA[
+            <p><a href="https://discuss.appium.io/users/jonahss">Jonah</a> wrote:</p>
+            <blockquote>
+              <p>Post positions which are currently seeking Appium QA professional!</p>
+
+<p>Or post here if you are seeking an Appium-related job.</p>
+            </blockquote>
+            <p>Posts: 2</p>
+            <p>Participants: 1</p>
+            <p><a href="https://discuss.appium.io/t/appium-job-postings/56">Read full topic</a></p>
+          ]]></description>
+          <link>https://discuss.appium.io/t/appium-job-postings/56</link>
+          <pubDate>Thu, 28 Aug 2014 19:05:21 -0400</pubDate>
+          <guid isPermaLink="false">topic-57</guid>
+          <source url="https://discuss.appium.io/t/appium-job-postings/56.rss">Appium Job postings</source>
+        </item>
         <item>
           <title>Appium Job postings</title>
           <author>no-reply@example.com (@jonahss Jonah)</author>
