@@ -7,8 +7,10 @@ from broken_links.items import BrokenLinksItem
 
 class LinkSpiderSpider(CrawlSpider):
     name = "link_spider"
+    # todo: target domain should be read in from a file
     target_domain = "bootstraponline.github.io"
 
+    # todo: start urls should be read in from a file
     start_urls = (
         'http://bootstraponline.github.io/scrapy-broken-links/',
     )
