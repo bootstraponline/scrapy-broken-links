@@ -13,12 +13,15 @@ class LinkSpiderSpider(CrawlSpider):
         'http://bootstraponline.github.io/scrapy-broken-links/',
     )
 
+    # If a link matches multiple rules, the first rule wins.
     rules = (
+        # If a link is within the target domain, follow it.
         Rule(LinkExtractor(allow_domains=[target_domain], unique=True),
              callback='parse_item',
              process_links='clean_links',
              follow=True),
-        Rule(LinkExtractor(deny_domains=[target_domain], unique=True),
+        # Don't follow any external domain links.
+        Rule(LinkExtractor(unique=True),
              callback='parse_item',
              process_links='clean_links',
              follow=False),
@@ -36,5 +39,4 @@ class LinkSpiderSpider(CrawlSpider):
         item['url'] = response.url
         item['status'] = response.status
         item['referer'] = response.request.headers['Referer']
-
         yield item
