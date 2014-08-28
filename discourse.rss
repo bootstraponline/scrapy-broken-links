@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Appium Discuss - Latest topics</title>
+    <link>https://discuss.appium.io/latest</link>
+    <description>Latest topics</description>
+    
+      <lastBuildDate>Thu, 28 Aug 2014 19:05:21 -0400</lastBuildDate>
+      <atom:link href="https://discuss.appium.io/latest.rss" rel="self" type="application/rss+xml" />
+        <item>
+          <title>Appium Job postings</title>
+          <author>no-reply@example.com (@jonahss Jonah)</author>
+          <category>News</category>
+          <description><![CDATA[
+            <p><a href="https://discuss.appium.io/users/jonahss">Jonah</a> wrote:</p>
+            <blockquote>
+              <p>Post positions which are currently seeking Appium QA professional!</p>
+
+<p>Or post here if you are seeking an Appium-related job.</p>
+            </blockquote>
+            <p>Posts: 2</p>
+            <p>Participants: 1</p>
+            <p><a href="https://discuss.appium.io/t/appium-job-postings/56">Read full topic</a></p>
+          ]]></description>
+          <link>https://discuss.appium.io/t/appium-job-postings/56</link>
+          <pubDate>Thu, 28 Aug 2014 19:05:21 -0400</pubDate>
+          <guid isPermaLink="false">topic-56</guid>
+          <source url="https://discuss.appium.io/t/appium-job-postings/56.rss">Appium Job postings</source>
+        </item>
+        <item>
+          <title>Appium Inspector 1.2.1/1.2.2 Crash</title>
+          <author>no-reply@example.com (@Ben_Boral Ben Boral)</author>
+          <category>Issues/Bugs</category>
+          <description><![CDATA[
+            <p><a href="https://discuss.appium.io/users/ben_boral">Ben Boral</a> wrote:</p>
+            <blockquote>
+              <p>This is a bug that was originally reported in the old Google Group:</p>
+
+<p><a href="https://groups.google.com/forum/#!searchin/appium-discuss/setLayerUsesCoreImageFilters%7Csort:relevance/appium-discuss/Ex8O04qVfMI/NmhChQte-MIJ" rel="nofollow">Link to original thread</a></p>
+
+<p>Appium consistently crashes when I open the inspector tool. Myself and the previous poster are on OSX 10.8.5. Does Appium no longer support Mountain Lion? Or is the problem something else?</p>
+
+<p>Thanks for any help,<br>Ben</p>
+            </blockquote>
+            <p>Posts: 1</p>
+            <p>Participants: 1</p>
+            <p><a href="https://discuss.appium.io/t/appium-inspector-1-2-1-1-2-2-crash/53">Read full topic</a></p>
+          ]]></description>
+          <link>https://discuss.appium.io/t/appium-inspector-1-2-1-1-2-2-crash/53</link>
+          <pubDate>Thu, 28 Aug 2014 18:29:34 -0400</pubDate>
+          <guid isPermaLink="false">topic-53</guid>
+          <source url="https://discuss.appium.io/t/appium-inspector-1-2-1-1-2-2-crash/53.rss">Appium Inspector 1.2.1/1.2.2 Crash</source>
+        </item>
+        <item>
+          <title>How to make the subview visible to the iOS UIAutomation tree</title>
+          <author>no-reply@example.com (@Satyajit Satyajit Malugu)</author>
+          <category>Support</category>
+          <description><![CDATA[
+            <p><a href="https://discuss.appium.io/users/satyajit">Satyajit Malugu</a> wrote:</p>
+            <blockquote>
+              <p>I recall there was some discussion on the steps need to make a subview visible to the UITree. Can someone point me to that?</p>
+            </blockquote>
+            <p>Posts: 2</p>
+            <p>Participants: 1</p>
+            <p><a href="https://discuss.appium.io/t/how-to-make-the-subview-visible-to-the-ios-uiautomation-tree/47">Read full topic</a></p>
+          ]]></description>
+          <link>https://discuss.appium.io/t/how-to-make-the-subview-visible-to-the-ios-uiautomation-tree/47</link>
+          <pubDate>Thu, 28 Aug 2014 17:19:38 -0400</pubDate>
+          <guid isPermaLink="false">topic-47</guid>
+          <source url="https://discuss.appium.io/t/how-to-make-the-subview-visible-to-the-ios-uiautomation-tree/47.rss">How to make the subview visible to the iOS UIAutomation tree</source>
+        </item>
+        <item>
+          <title>Screen orientation and element-relative swiping tutorial</title>
+          <author>no-reply@example.com (@Hank Henry Hatcher)</author>
+          <category>Tutorials/Documentation</category>
+          <description><![CDATA[
+            <p><a href="https://discuss.appium.io/users/hank">Henry Hatcher</a> wrote:</p>
+            <blockquote>
+              <p>This is reposted from the appium-discuss google group at Jonah's request, slightly modified to make more sense out of context, and with a simple code snippet.  All examples are in java/junit terminology, but they should be usable in your language of choice with a bit of translating.</p>
+
+<p>First, the AppiumDriver has a getOrientation() method that will return a ScreenOrientation object.  The ScreenOrientation object has a value() method that returns either "portrait" or "landscape".  So you can pretty easily tell what your device's current orientation is by calling driver.getOrientation().value().</p>
+
+<p>You should also be able to call driver.rotate("LANDSCAPE") or driver.rotate("PORTRAIT") to switch orientations (although I haven't actually used that functionality in any of my tests to date, so I have no idea if it actually works).</p>
+
+<p>For element-relative swiping, you can locate whatever WebElement you're trying to interact with, and then call element.getLocation().getX() and element.getLocation().getY() to get the upper-left coordinates of the element.   element.getSize().getWidth() and element.getSize().getHeight() will allow you to find the width and height of the element, and from there it's pretty easy to figure out the x and y for your relative swipes.  You will probably want to do a little bit of "safety padding" on those values just to make sure that you're not clicking on the absolute right or left edge of the element you're trying to interact with.</p>
+
+<p>So a simple "swipe left-to-right on some WebElement, or right-to-left if we're in landscape layout" example:</p>
+
+<pre><code>public void swipeElementExample(WebElement el) {
+  String orientation = driver.getOrientation().value();
+
+  // get the X coordinate of the upper left corner of the element, then add the element's width to get the rightmost X value of the element
+  int leftX = el.getLocation().getX();
+  int rightX = leftX + el.getSize().getWidth();
+
+  // get the Y coordinate of the upper left corner of the element, then subtract the height to get the lowest Y value of the element
+  int upperY = el.getLocation().getY();
+  int lowerY = upperY - el.getSize().getHeight();
+  int middleY = (upperY - lowerY) / 2;
+
+  if (orientation.equals("portrait")) {
+    // Swipe from just inside the left-middle to just inside the right-middle of the element over 500ms
+      driver.swipe(leftX + 5, middleY, rightX - 5, middleY, 500);
+  }
+  else if (orientation.equals("landscape")) {
+    // Swipe from just inside the right-middle to just inside the left-middle of the element over 500ms
+    driver.swipe(rightX - 5, middleY, leftX + 5, middleY, 500);
+  }
+}</code></pre>
+
+<p>Not crazy complex, and not particularly efficient, but it should be enough to get you started.</p>
+
+<p>-Hank</p>
+            </blockquote>
+            <p>Posts: 1</p>
+            <p>Participants: 1</p>
+            <p><a href="https://discuss.appium.io/t/screen-orientation-and-element-relative-swiping-tutorial/52">Read full topic</a></p>
+          ]]></description>
+          <link>https://discuss.appium.io/t/screen-orientation-and-element-relative-swiping-tutorial/52</link>
+          <pubDate>Thu, 28 Aug 2014 18:11:17 -0400</pubDate>
+          <guid isPermaLink="false">topic-52</guid>
+          <source url="https://discuss.appium.io/t/screen-orientation-and-element-relative-swiping-tutorial/52.rss">Screen orientation and element-relative swiping tutorial</source>
+        </item>
+        <item>
+          <title>Java Client 1.6 Troubleshooting setLocation()</title>
+          <author>no-reply@example.com (@Ben_Boral Ben Boral)</author>
+          <category>Issues/Bugs</category>
+          <description><![CDATA[
+            <p><a href="https://discuss.appium.io/users/ben_boral">Ben Boral</a> wrote:</p>
+            <blockquote>
+              <p>On Thu, Aug 28, 2014 at 4:29 PM, Jonah Stiennon <a href="mailto:jonahss@saucelabs.com">jonahss@saucelabs.com</a> wrote:<br>I'll take a look at this right now!</p>
+
+<p>In the meantime, can you repost this to our New Forum at discuss.appium.io ? Thanks.</p>
+
+<p>On Thursday, August 28, 2014 2:25:26 PM UTC-7, Ben Boral wrote:<br>Hi Jonah,</p>
+
+<p>Have you been able to use setLocation() successfully?</p>
+
+<p>I'm attempting to use it with the extremely simple case:</p>
+
+<p>Location location = new Location(1, 1, 1);<br>appiumDriver.setLocation(location);</p>
+
+<p>This yields an error related how location is specified. See below from Appium logs. Any help with this, such as sample code snippet, would be much appreciated.</p>
+
+<p>info: &lt;-- POST /wd/hub/session/603244c1-ff73-4227-9cb7-af07f0a94c19/location 500 151.991 ms - 193 </p>
+
+<p>debug: Socket data being routed. </p>
+
+<p>debug: Got result from instruments: {"status":17,"value":"location not specified correctly"} </p>
+
+<p>debug: Responding to client with error: {"status":17,"value":{"message":"An error occurred while executing user supplied JavaScript.","origValue":"location not specified correctly"},"sessionId":"603244c1-ff73-4227-9cb7-af07f0a94c19"} </p>
+
+<p>debug: [INST] 2014-08-28 20:42:37 +0000 Error: Error during eval: setLocationWithOptions@[native code] </p>
+
+<pre><code>   eval code</code></pre>
+
+<p>eval@[native code] </p>
+
+<p>startProcessing@file://localhost/Applications/Appium.app/Contents/Resources/node_modules/appium/0977A26B-81A8-44C8-B350-AF7A8C00E4CE/commands.js:120:30 </p>
+
+<p>bootstrap@file://localhost/Applications/Appium.app/Contents/Resources/node_modules/appium/BB489BDA-8783-44B4-8327-5217ED01E91C/bootstrap.js:18:29 </p>
+
+<p>global code@file://localhost/Applications/Appium.app/Contents/Resources/node_modules/appium/9D200DD6-D975-4964-8CC4-4D56440CB0D8/bootstrap-fe8fa37a970f98cc.js:9:10 </p>
+
+<p>debug: [INST] 2014-08-28 20:42:37 +0000 Debug: Running system command #52: /Applications/Appium.app/Contents/Resources/node/bin/node /Applications/Appium.app/Contents/Resources/node_modules/appium/node_modules/appium-uiauto/bin/command-proxy-client.js /tmp/instruments_sock 2,{"status":17,"value":"location not specified correctly"}...</p>
+
+<p>Thanks,<br>Ben</p>
+            </blockquote>
+            <p>Posts: 4</p>
+            <p>Participants: 2</p>
+            <p><a href="https://discuss.appium.io/t/java-client-1-6-troubleshooting-setlocation/50">Read full topic</a></p>
+          ]]></description>
+          <link>https://discuss.appium.io/t/java-client-1-6-troubleshooting-setlocation/50</link>
+          <pubDate>Thu, 28 Aug 2014 17:32:45 -0400</pubDate>
+          <guid isPermaLink="false">topic-50</guid>
+          <source url="https://discuss.appium.io/t/java-client-1-6-troubleshooting-setlocation/50.rss">Java Client 1.6 Troubleshooting setLocation()</source>
+        </item>
+        <item>
+          <title>Welcome to the new appium-discuss</title>
+          <author>no-reply@example.com (@jonahss Jonah)</author>
+          <category>Meta</category>
+          <description><![CDATA[
+            <p><a href="https://discuss.appium.io/users/jonahss">Jonah</a> wrote:</p>
+            <blockquote>
+              <p><a href="http://www.discourse.org">Discourse</a> is such a nicer forum than google-groups, and we really pride ourselves on having an active community. Here, posts will be more useful for people looking to solve issues.</p>
+
+<p>If you have any comments about the new discourse forum, or just want to experiment with features, feel free to reply to this post. Don't worry about making mistakes <img src="//discuss.appium.io/plugins/emoji/images/smile.png" title=":smile:" class="emoji" alt="smile" width="20" height="20"></p>
+
+<p>An important feature of the new appium-discuss is the ability to add <strong>tags</strong> to your post. Please apply the proper category, but also add tags for platform, appium version, language, and OS.</p>
+
+<p>Only admins can create new tags, so post here with any suggestions.</p>
+
+<p>Welcome!</p>
+            </blockquote>
+            <p>Posts: 1</p>
+            <p>Participants: 1</p>
+            <p><a href="https://discuss.appium.io/t/welcome-to-the-new-appium-discuss/44">Read full topic</a></p>
+          ]]></description>
+          <link>https://discuss.appium.io/t/welcome-to-the-new-appium-discuss/44</link>
+          <pubDate>Tue, 26 Aug 2014 20:28:50 -0400</pubDate>
+          <guid isPermaLink="false">topic-44</guid>
+          <source url="https://discuss.appium.io/t/welcome-to-the-new-appium-discuss/44.rss">Welcome to the new appium-discuss</source>
+        </item>
+        <item>
+          <title>Appium server v1.2.2 released</title>
+          <author>no-reply@example.com (@jonahss Jonah)</author>
+          <category>News</category>
+          <description><![CDATA[
+            <p><a href="https://discuss.appium.io/users/jonahss">Jonah</a> wrote:</p>
+            <blockquote>
+              <p>Jonathan Lipps posted the following notes:</p>
+
+<blockquote>
+<p>Hi everyone,</p>
+<p>I'm pleased to announce that Appium Server v1.2.2 has been released, with many bugfixes:</p>
+<p><a href="https://github.com/appium/appium/releases/tag/v1.2.2" class="onebox" target="_blank">https://github.com/appium/appium/releases/tag/v1.2.2</a></p>
+<p>I wanted to point out two bugfixes that might be breaking changes for some users. First of all, sendKeys() no longer erroneously clears out the textfield before typing text into. So if you depended on this erroneous behavior, you might need to add clear() before your sendKeys() call.</p>
+<p>Clearing a textfield in Android with hint text doesn't work, so we added a new method <code>setText()</code> which will perform the equivalent of <code>clear()</code> + <code>sendKeys()</code> for android hint fields.<br>Check your client library for more information on how to use this new command.</p>
+<p>Secondly, XPath searches on Android have been pretty broken for a while. We made some changes that should help a lot, including changing our XPath library to a less buggy one, however there's a chance certain XPath selectors might not target the same elements as before. So if you rely heavily on XPath, give things a shot but be aware there might be some changes required.</p>
+<p>Cheers,<br>Jonathan</p>
+</blockquote>
+            </blockquote>
+            <p>Posts: 1</p>
+            <p>Participants: 1</p>
+            <p><a href="https://discuss.appium.io/t/appium-server-v1-2-2-released/43">Read full topic</a></p>
+          ]]></description>
+          <link>https://discuss.appium.io/t/appium-server-v1-2-2-released/43</link>
+          <pubDate>Tue, 26 Aug 2014 20:21:17 -0400</pubDate>
+          <guid isPermaLink="false">topic-43</guid>
+          <source url="https://discuss.appium.io/t/appium-server-v1-2-2-released/43.rss">Appium server v1.2.2 released</source>
+        </item>
+        <item>
+          <title>What is the duration that needs to be sent to scroll command?</title>
+          <author>no-reply@example.com (@Satyajit Satyajit Malugu)</author>
+          <category>Issues/Bugs</category>
+          <description><![CDATA[
+            <p><a href="https://discuss.appium.io/users/satyajit">Satyajit Malugu</a> wrote:</p>
+            <blockquote>
+              <p>I was unable to set a duration on execute_script, "mobile:scroll" in ruby_lib.</p>
+
+<p>I get the error duration isn't in the range 3-60secs. No matter what combination I tried, it results in an error.</p>
+            </blockquote>
+            <p>Posts: 3</p>
+            <p>Participants: 3</p>
+            <p><a href="https://discuss.appium.io/t/what-is-the-duration-that-needs-to-be-sent-to-scroll-command/40">Read full topic</a></p>
+          ]]></description>
+          <link>https://discuss.appium.io/t/what-is-the-duration-that-needs-to-be-sent-to-scroll-command/40</link>
+          <pubDate>Tue, 26 Aug 2014 17:10:14 -0400</pubDate>
+          <guid isPermaLink="false">topic-40</guid>
+          <source url="https://discuss.appium.io/t/what-is-the-duration-that-needs-to-be-sent-to-scroll-command/40.rss">What is the duration that needs to be sent to scroll command?</source>
+        </item>
+        <item>
+          <title>About the Tutorials/Documentation category</title>
+          <author>no-reply@example.com (@jonahss Jonah)</author>
+          <category>Tutorials/Documentation</category>
+          <description><![CDATA[
+            <p><a href="https://discuss.appium.io/users/jonahss">Jonah</a> wrote:</p>
+            <blockquote>
+              <p>Do you have information you want to share?<br>This category is for interesting documentation, tutorials, workarounds, and test-writing techniques</p>
+            </blockquote>
+            <p>Posts: 1</p>
+            <p>Participants: 1</p>
+            <p><a href="https://discuss.appium.io/t/about-the-tutorials-documentation-category/38">Read full topic</a></p>
+          ]]></description>
+          <link>https://discuss.appium.io/t/about-the-tutorials-documentation-category/38</link>
+          <pubDate>Tue, 26 Aug 2014 14:50:35 -0400</pubDate>
+          <guid isPermaLink="false">topic-38</guid>
+          <source url="https://discuss.appium.io/t/about-the-tutorials-documentation-category/38.rss">About the Tutorials/Documentation category</source>
+        </item>
+        <item>
+          <title>About the Support category</title>
+          <author>no-reply@example.com (@jonahss Jonah)</author>
+          <category>Support</category>
+          <description><![CDATA[
+            <p><a href="https://discuss.appium.io/users/jonahss">Jonah</a> wrote:</p>
+            <blockquote>
+              <p>Ask questions about how to use or set up appium</p>
+
+<p>Just with the Issue/Bugs category, please add the following tags to your post so we can help:<br> - Platform (iOS or Android)<br> - Appium version<br> - Emulator/Simulator or Real Device<br> - Client langauage (language binding)<br> - OS</p>
+            </blockquote>
+            <p>Posts: 1</p>
+            <p>Participants: 1</p>
+            <p><a href="https://discuss.appium.io/t/about-the-support-category/36">Read full topic</a></p>
+          ]]></description>
+          <link>https://discuss.appium.io/t/about-the-support-category/36</link>
+          <pubDate>Tue, 26 Aug 2014 14:32:42 -0400</pubDate>
+          <guid isPermaLink="false">topic-36</guid>
+          <source url="https://discuss.appium.io/t/about-the-support-category/36.rss">About the Support category</source>
+        </item>
+        <item>
+          <title>About the Feature category</title>
+          <author>no-reply@example.com (@jonahss Jonah)</author>
+          <category>Feature</category>
+          <description><![CDATA[
+            <p><a href="https://discuss.appium.io/users/jonahss">Jonah</a> wrote:</p>
+            <blockquote>
+              <p>Request or Suggest new features for appium</p>
+            </blockquote>
+            <p>Posts: 1</p>
+            <p>Participants: 1</p>
+            <p><a href="https://discuss.appium.io/t/about-the-feature-category/41">Read full topic</a></p>
+          ]]></description>
+          <link>https://discuss.appium.io/t/about-the-feature-category/41</link>
+          <pubDate>Tue, 26 Aug 2014 17:26:05 -0400</pubDate>
+          <guid isPermaLink="false">topic-41</guid>
+          <source url="https://discuss.appium.io/t/about-the-feature-category/41.rss">About the Feature category</source>
+        </item>
+        <item>
+          <title>About the Issues/Bugs category</title>
+          <author>no-reply@example.com (@jonahss Jonah)</author>
+          <category>Issues/Bugs</category>
+          <description><![CDATA[
+            <p><a href="https://discuss.appium.io/users/jonahss">Jonah</a> wrote:</p>
+            <blockquote>
+              <p>Post bugs or issue here</p>
+
+<h2>Please mark your post with the following tags:</h2>
+
+<ul>
+<li>Platform you are automating (iOS or Android)</li>
+<li>Appium version</li>
+<li>Simulator/Emulator or Real Device</li>
+<li>The language you are using for writing tests (client binding)</li>
+<li>Your OS </li>
+</ul>
+
+<p>If you have any server logs, please include them at the bottom of your post inside a code block ( ``` )</p>
+            </blockquote>
+            <p>Posts: 1</p>
+            <p>Participants: 1</p>
+            <p><a href="https://discuss.appium.io/t/about-the-issues-bugs-category/35">Read full topic</a></p>
+          ]]></description>
+          <link>https://discuss.appium.io/t/about-the-issues-bugs-category/35</link>
+          <pubDate>Tue, 26 Aug 2014 14:32:14 -0400</pubDate>
+          <guid isPermaLink="false">topic-35</guid>
+          <source url="https://discuss.appium.io/t/about-the-issues-bugs-category/35.rss">About the Issues/Bugs category</source>
+        </item>
+        <item>
+          <title>About the News category</title>
+          <author>no-reply@example.com (@jonahss Jonah)</author>
+          <category>News</category>
+          <description><![CDATA[
+            <p><a href="https://discuss.appium.io/users/jonahss">Jonah</a> wrote:</p>
+            <blockquote>
+              <p>News about appium and related events</p>
+            </blockquote>
+            <p>Posts: 1</p>
+            <p>Participants: 1</p>
+            <p><a href="https://discuss.appium.io/t/about-the-news-category/37">Read full topic</a></p>
+          ]]></description>
+          <link>https://discuss.appium.io/t/about-the-news-category/37</link>
+          <pubDate>Tue, 26 Aug 2014 14:33:09 -0400</pubDate>
+          <guid isPermaLink="false">topic-37</guid>
+          <source url="https://discuss.appium.io/t/about-the-news-category/37.rss">About the News category</source>
+        </item>
+        <item>
+          <title>About the Meta category</title>
+          <author>no-reply@example.com (@system system)</author>
+          <category>Meta</category>
+          <description><![CDATA[
+            <p><a href="https://discuss.appium.io/users/system">system</a> wrote:</p>
+            <blockquote>
+              <p>Discussion about this site, its organization, how it works, and how we can improve it.</p>
+            </blockquote>
+            <p>Posts: 1</p>
+            <p>Participants: 1</p>
+            <p><a href="https://discuss.appium.io/t/about-the-meta-category/2">Read full topic</a></p>
+          ]]></description>
+          <link>https://discuss.appium.io/t/about-the-meta-category/2</link>
+          <pubDate>Fri, 22 Aug 2014 15:19:51 -0400</pubDate>
+          <guid isPermaLink="false">topic-2</guid>
+          <source url="https://discuss.appium.io/t/about-the-meta-category/2.rss">About the Meta category</source>
+        </item>
+  </channel>
+</rss>
