@@ -12,3 +12,5 @@ BOT_NAME = 'broken_links'
 
 SPIDER_MODULES = ['broken_links.spiders']
 NEWSPIDER_MODULE = 'broken_links.spiders'
+
+HTTPERROR_ALLOW_ALL = True

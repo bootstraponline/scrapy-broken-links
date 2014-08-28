@@ -17,11 +17,12 @@ class LinkSpiderSpider(CrawlSpider):
     # http://doc.scrapy.org/en/latest/topics/settings.html#std:setting-DOWNLOAD_DELAY
     name = "link_spider"
     target_domain = "bootstraponline.github.io"
-    allowed_domains = [target_domain, "www.github.com"]
+
     start_urls = (
         'http://bootstraponline.github.io/scrapy-broken-links/',
     )
 
+    # todo: process links to remove html fragments and query parameters
     # http://doc.scrapy.org/en/latest/topics/link-extractors.html#topics-link-extractors
     # http://doc.scrapy.org/en/latest/topics/spiders.html#scrapy.contrib.spiders.Rule
     rules = (
