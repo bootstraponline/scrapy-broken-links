@@ -26,6 +26,9 @@ Which is a list of one (or more) Rule objects. Each Rule defines a certain behav
 > - http://doc.scrapy.org/en/latest/topics/spiders.html#scrapy.contrib.spiders.Rule
  
 
+Make sure the crawler doesn't cause problems.
+
+- http://doc.scrapy.org/en/latest/topics/autothrottle.html
 
 -https://github.com/scrapy/scrapy/blob/e62bbf0766568b902f99d963030e57b96cc2aae6/tests/test_spider.py
 
