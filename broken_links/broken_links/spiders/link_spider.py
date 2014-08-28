@@ -6,12 +6,14 @@ from scrapy.contrib.spiders import CrawlSpider, Rule
 
 from broken_links.items import BrokenLinksItem
 
-# scrapy runspider link_spider.py
+# scrapy shell http://www.google.com
+# import inspect
+# inspect.getmembers(response)
 #
 # run from the project directory (broken_links/broken_links$ )
 # note that this will append to the items.json file if it exists instead of overriding.
 #
-# scrapy crawl link_spider -o items.json
+# rm items.json; scrapy crawl link_spider -o items.json; cat items.json
 class LinkSpiderSpider(CrawlSpider):
     # todo: configure download delay
     # http://doc.scrapy.org/en/latest/topics/settings.html#std:setting-DOWNLOAD_DELAY
@@ -35,6 +37,6 @@ class LinkSpiderSpider(CrawlSpider):
         item = BrokenLinksItem()
         item['url'] = response.url
         item['status'] = response.status
-        item['parent'] = response.request.url
+        item['referer'] = response.request.headers['Referer']
 
         yield item

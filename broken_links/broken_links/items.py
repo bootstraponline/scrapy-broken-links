@@ -12,4 +12,4 @@ class BrokenLinksItem(scrapy.Item):
     # define the fields for your item here like:
     url = scrapy.Field()
     status = scrapy.Field()
-    parent = scrapy.Field()
+    referer = scrapy.Field()
