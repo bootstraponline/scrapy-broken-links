@@ -28,22 +28,24 @@ class LinkSpiderSpider(CrawlSpider):
     # http://doc.scrapy.org/en/latest/topics/link-extractors.html#topics-link-extractors
     # http://doc.scrapy.org/en/latest/topics/spiders.html#scrapy.contrib.spiders.Rule
     rules = (
-        Rule(LinkExtractor(allow_domains=[target_domain], unique=True), callback='parse_item', process_links='clean_links', follow=True),
-        Rule(LinkExtractor(deny_domains=[target_domain], unique=True), callback='parse_item', process_links='clean_links', follow=False),
+        Rule(LinkExtractor(allow_domains=[target_domain], unique=True), callback='parse_item',
+             process_links='clean_links', follow=True),
+        Rule(LinkExtractor(deny_domains=[target_domain], unique=True), callback='parse_item',
+             process_links='clean_links', follow=False),
     )
 
-    def clean_links(links):
-        cleaned = []
+    # https://github.com/scrapy/scrapy/blob/e62bbf0766568b902f99d963030e57b96cc2aae6/tests/test_spider.py
+    def clean_links(self, links):
+        # Link(url='http://www.github.com/', text='valid github link', fragment='', nofollow=False)
+        # log.msg(repr(links[0]), level=log.INFO)
         for link in links:
             # remove html fragment (#) and query params (?)
-            link = link.split('#')[0].split('?')[0]
-            cleaned.append(link)
-
-        return cleaned
-
+            link.fragment = ''
+            link.url = link.url.split('#')[0].split('?')[0]
+            yield link
 
     def parse_item(self, response):
-        log.msg('------------------------------- Parsing: %s' % response.url, level=log.INFO)
+        # log.msg('------------------------------- Parsing: %s' % response.url, level=log.INFO)
         item = BrokenLinksItem()
         item['url'] = response.url
         item['status'] = response.status
