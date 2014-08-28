@@ -18,7 +18,14 @@ note that this will append to the items.json file if it exists instead of overri
 
 - http://doc.scrapy.org/en/latest/topics/settings.html#std:setting-DOWNLOAD_DELAY
 - http://doc.scrapy.org/en/latest/topics/link-extractors.html#topics-link-extractors
-- http://doc.scrapy.org/en/latest/topics/spiders.html#scrapy.contrib.spiders.Rule
+
+
+> "rules
+Which is a list of one (or more) Rule objects. Each Rule defines a certain behaviour for crawling the site. Rules objects are described below. If multiple rules match the same link, the first one will be used, according to the order they’re defined in this attribute."
+>
+> - http://doc.scrapy.org/en/latest/topics/spiders.html#scrapy.contrib.spiders.Rule
+ 
+
 
 -https://github.com/scrapy/scrapy/blob/e62bbf0766568b902f99d963030e57b96cc2aae6/tests/test_spider.py
 
