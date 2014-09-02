@@ -33,7 +33,7 @@ class LinkSpiderSpider(CrawlSpider):
 
         # load target domain and then use it once to define the rules
         target_domain = self.remote_file_to_string(target_domain)
-        print 'Target domain:', target_domain
+        print 'Target domain: ', target_domain
 
         # If a link matches multiple rules, the first rule wins.
         self.rules = (
