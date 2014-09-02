@@ -7,6 +7,11 @@ from broken_links.items import BrokenLinksItem
 
 import urllib2
 
+# Follows urls on target domain and saves url, status, and referer.
+#
+# scrapy crawl link_spider -o items.json
+#                          -a start_urls=url/to/start_urls.txt
+#                          -a target_domain=url/to/target_domain.txt
 class LinkSpiderSpider(CrawlSpider):
     name = "link_spider"
 
