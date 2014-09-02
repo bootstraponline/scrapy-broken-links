@@ -5,15 +5,24 @@ from scrapy.contrib.spiders import CrawlSpider, Rule
 
 from broken_links.items import BrokenLinksItem
 
+import urllib2
+
 class LinkSpiderSpider(CrawlSpider):
     name = "link_spider"
-    # todo: target domain should be read in from a file
-    target_domain = "bootstraponline.github.io"
 
-    # todo: start urls should be read in from a file
-    start_urls = (
-        'http://bootstraponline.github.io/scrapy-broken-links/',
-    )
+    # urllib2 is sync however we're only using these methods once to initialize the crawler.
+    def remote_file_to_string(url):
+        # read, split, filter, return first non-empty line.
+        return filter(None, urllib2.urlopen(url).read().splitlines())[0]
+
+    def remote_file_to_array(url):
+        # read, split, filter, return all non-empty lines
+        return filter(None, urllib2.urlopen(url).read().splitlines())
+
+    # todo: load url from argument to the crawler
+    target_domain = remote_file_to_string('https://raw.githubusercontent.com/bootstraponline/scrapy-broken-links/gh-pages/scrapy/start_urls.txt')
+
+    start_urls = remote_file_to_array('https://raw.githubusercontent.com/bootstraponline/scrapy-broken-links/gh-pages/scrapy/start_urls.txt')
 
     # If a link matches multiple rules, the first rule wins.
     rules = (
