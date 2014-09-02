@@ -17,7 +17,8 @@ note that this will append to the items.json file if it exists instead of overri
 ```
 rm items.json
 scrapy crawl link_spider -o items.json -a arg_start_urls=https://raw.githubusercontent.com/bootstraponline/scrapy-broken-links/gh-pages/scrapy/start_urls.txt -a arg_target_domain=https://raw.githubusercontent.com/bootstraponline/scrapy-broken-links/gh-pages/scrapy/target_domain.txt
-cat items.json`
+cat items.json
+```
 
 - http://doc.scrapy.org/en/latest/topics/settings.html#std:setting-DOWNLOAD_DELAY
 - http://doc.scrapy.org/en/latest/topics/link-extractors.html#topics-link-extractors
