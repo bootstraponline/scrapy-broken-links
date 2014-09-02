@@ -58,7 +58,7 @@ class LinkSpiderSpider(CrawlSpider):
 
         # now deal with requests
         start_urls = self.remote_file_to_array(self.arg_start_urls)
-        print 'Start urls: ', self.start_urls
+        print 'Start urls: ', start_urls
         for url in start_urls:
             yield scrapy.Request(url)
 
