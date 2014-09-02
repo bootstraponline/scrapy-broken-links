@@ -23,7 +23,7 @@ cat items.json
 ```
 arg_start_urls
 
-https://raw.githubusercontent.com/bootstraponline/scrapy-broken-links/gh-pages/scrapy/start_urls.txt -a 
+https://raw.githubusercontent.com/bootstraponline/scrapy-broken-links/gh-pages/scrapy/start_urls.txt
 
 arg_target_domain
 
