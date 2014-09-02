@@ -10,12 +10,10 @@ import urllib2
 # Follows urls on target domain and saves url, status, and referer.
 #
 # scrapy crawl link_spider -o items.json
-#                          -a start_urls=url/to/start_urls.txt
-#                          -a target_domain=url/to/target_domain.txt
+#                          -a arg_start_urls=url/to/start_urls.txt
+#                          -a arg_target_domain=url/to/target_domain.txt
 class LinkSpiderSpider(CrawlSpider):
     name = "link_spider"
-    arg_target_domain = None
-    arg_start_urls = None
 
     # urllib2 is sync however we're only using these methods once to initialize the crawler.
     @staticmethod
@@ -30,10 +28,8 @@ class LinkSpiderSpider(CrawlSpider):
 
     # __init__ is called to get the spider name so avoid doing any extra work
     # in init such as downloading files.
-    def __init__(self, target_domain=None, start_urls=None, *args, **kwargs):
-        super(LinkSpiderSpider, self).__init__(*args, **kwargs)
-        self.arg_target_domain = target_domain
-        self.arg_start_urls = start_urls
+    #
+    # args are automatically made available to the spider.
 
     def start_requests(self):
         # update rules
