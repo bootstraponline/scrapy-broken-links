@@ -40,3 +40,8 @@ Link(url='http://www.github.com/', text='valid github link', fragment='', nofoll
 log.msg(repr(links[0]), level=log.INFO)
 log.msg('------------------------------- Parsing: %s' % response.url, level=log.INFO)
 ```
+
+
+Args can be set on scraping hub
+
+![](args_on_scrapinghub.png)
