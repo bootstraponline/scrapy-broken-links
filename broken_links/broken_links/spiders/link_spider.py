@@ -14,6 +14,8 @@ import urllib2
 #                          -a target_domain=url/to/target_domain.txt
 class LinkSpiderSpider(CrawlSpider):
     name = "link_spider"
+    arg_target_domain = None
+    arg_start_urls = None
 
     # urllib2 is sync however we're only using these methods once to initialize the crawler.
     @staticmethod
@@ -26,13 +28,17 @@ class LinkSpiderSpider(CrawlSpider):
         # read, split, filter, return all non-empty lines
         return filter(None, urllib2.urlopen(url).read().splitlines())
 
+    # __init__ is called to get the spider name so avoid doing any extra work
+    # in init such as downloading files.
     def __init__(self, target_domain=None, start_urls=None, *args, **kwargs):
-        # set start urls property on the spider
-        self.start_urls = self.remote_file_to_array(start_urls)
-        print 'Start urls: ', self.start_urls
+        super(LinkSpiderSpider, self).__init__(*args, **kwargs)
+        self.arg_target_domain = target_domain
+        self.arg_start_urls = start_urls
 
+    def start_requests(self):
+        # update rules
         # load target domain and then use it once to define the rules
-        target_domain = self.remote_file_to_string(target_domain)
+        target_domain = self.remote_file_to_string(self.arg_target_domain)
         print 'Target domain: ', target_domain
 
         # If a link matches multiple rules, the first rule wins.
@@ -48,10 +54,13 @@ class LinkSpiderSpider(CrawlSpider):
                  process_links='clean_links',
                  follow=False),
         )
+        self._compile_rules()
 
-        # must init **after** setting self.start_urls / self.rules
-        # otherwise the crawler will do nothing.
-        super(LinkSpiderSpider, self).__init__(*args, **kwargs)
+        # now deal with requests
+        start_urls = self.remote_file_to_array(self.arg_start_urls)
+        print 'Start urls: ', self.start_urls
+        for url in start_urls:
+            yield scrapy.Request(url)
 
     # rule process_links callback
     def clean_links(self, links):
