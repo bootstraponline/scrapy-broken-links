@@ -2,7 +2,7 @@
 import scrapy
 from scrapy.contrib.linkextractors import LinkExtractor
 from scrapy.contrib.spiders import CrawlSpider, Rule
-
+from scrapy.utils.sitemap import Sitemap
 from broken_links.items import BrokenLinksItem
 
 import urllib2
@@ -25,6 +25,16 @@ class LinkSpiderSpider(CrawlSpider):
     def remote_file_to_array(url):
         # read, split, filter, return all non-empty lines
         return filter(None, urllib2.urlopen(url).read().splitlines())
+
+    @staticmethod
+    def sitemap_to_array(url):
+        results = []
+        body = urllib2.urlopen(url).read()
+        sitemap = Sitemap(body)
+        for item in sitemap:
+            results.append(item['loc'])
+        return results
+
 
     # __init__ is called to get the spider name so avoid doing any extra work
     # in init such as downloading files.
@@ -53,7 +63,12 @@ class LinkSpiderSpider(CrawlSpider):
         self._compile_rules()
 
         # now deal with requests
-        start_urls = self.remote_file_to_array(self.arg_start_urls)
+        start_urls = []
+        if self.arg_start_urls.endswith('.xml'):
+            print 'sitemap detected!'
+            start_urls = self.sitemap_to_array(self.arg_start_urls)
+        else:
+            start_urls = self.remote_file_to_array(self.arg_start_urls)
         print 'Start urls: ', start_urls
         # must set dont_filter on the start_urls requests otherwise
         # they will not be recorded in the items output because it'll
