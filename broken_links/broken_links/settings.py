@@ -22,5 +22,5 @@ HTTPERROR_ALLOW_ALL = True
 # Make sure the crawler doesn't cause problems for the servers.
 # http://doc.scrapy.org/en/latest/topics/autothrottle.html
 AUTOTHROTTLE_ENABLED = True
-AUTOTHROTTLE_START_DELAY = 10.0 # default is 5
-AUTOTHROTTLE_MAX_DELAY = 120.0 # default is 60
+AUTOTHROTTLE_START_DELAY = 20 # default is 5
+AUTOTHROTTLE_MAX_DELAY = 10 * 60 # default is 60
