@@ -58,6 +58,7 @@ class LinkSpiderSpider(CrawlSpider):
         # must set dont_filter on the start_urls requests otherwise
         # they will not be recorded in the items output because it'll
         # be considered a duplicate url.
+        # see https://github.com/scrapy/scrapy/blob/5daa14770b23da250ccfd4329899a1c3f669b1f3/scrapy/spider.py#L65
         for url in start_urls:
             yield scrapy.Request(url, dont_filter=True)
 
