@@ -17,11 +17,6 @@ class LinkSpiderSpider(CrawlSpider):
 
     # urllib2 is sync however we're only using these methods once to initialize the crawler.
     @staticmethod
-    def remote_file_to_string(url):
-        # read, split, filter, return first non-empty line.
-        return filter(None, urllib2.urlopen(url).read().splitlines())[0]
-
-    @staticmethod
     def remote_file_to_array(url):
         # read, split, filter, return all non-empty lines
         return filter(None, urllib2.urlopen(url).read().splitlines())
@@ -35,7 +30,6 @@ class LinkSpiderSpider(CrawlSpider):
             results.append(item['loc'])
         return results
 
-
     # __init__ is called to get the spider name so avoid doing any extra work
     # in init such as downloading files.
     #
@@ -44,7 +38,8 @@ class LinkSpiderSpider(CrawlSpider):
     def start_requests(self):
         # update rules
         # load target domain and then use it once to define the rules
-        target_domain = self.remote_file_to_string(self.arg_target_domain)
+        # target domain is a string value.
+        target_domain = self.arg_target_domain
         print 'Target domain: ', target_domain
 
         # If a link matches multiple rules, the first rule wins.
@@ -69,7 +64,8 @@ class LinkSpiderSpider(CrawlSpider):
             start_urls = self.sitemap_to_array(self.arg_start_urls)
         else:
             start_urls = self.remote_file_to_array(self.arg_start_urls)
-        print 'Start urls: ', start_urls
+        print 'Start url count: ', len(start_urls)
+        print 'First url:', start_urls[0]
         # must set dont_filter on the start_urls requests otherwise
         # they will not be recorded in the items output because it'll
         # be considered a duplicate url.
