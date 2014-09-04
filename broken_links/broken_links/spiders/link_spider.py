@@ -11,7 +11,7 @@ import urllib2
 #
 # scrapy crawl link_spider -o items.json
 #                          -a arg_start_urls=url/to/start_urls.txt
-#                          -a arg_target_domain=url/to/target_domain.txt
+#                          -a arg_target_domain=example.com
 class LinkSpiderSpider(CrawlSpider):
     name = "link_spider"
 
@@ -60,12 +60,12 @@ class LinkSpiderSpider(CrawlSpider):
         # now deal with requests
         start_urls = []
         if self.arg_start_urls.endswith('.xml'):
-            print 'sitemap detected!'
+            print 'Sitemap detected!'
             start_urls = self.sitemap_to_array(self.arg_start_urls)
         else:
             start_urls = self.remote_file_to_array(self.arg_start_urls)
         print 'Start url count: ', len(start_urls)
-        print 'First url:', start_urls[0]
+        print 'First url: ', start_urls[0]
         # must set dont_filter on the start_urls requests otherwise
         # they will not be recorded in the items output because it'll
         # be considered a duplicate url.
