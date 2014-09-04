@@ -1,3 +1,4 @@
+broken_links/scrapy.cfg
 *.json
 *.swp
 .idea/

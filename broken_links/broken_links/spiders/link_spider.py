@@ -55,8 +55,11 @@ class LinkSpiderSpider(CrawlSpider):
         # now deal with requests
         start_urls = self.remote_file_to_array(self.arg_start_urls)
         print 'Start urls: ', start_urls
+        # must set dont_filter on the start_urls requests otherwise
+        # they will not be recorded in the items output because it'll
+        # be considered a duplicate url.
         for url in start_urls:
-            yield scrapy.Request(url)
+            yield scrapy.Request(url, dont_filter=True)
 
     # rule process_links callback
     def clean_links(self, links):
