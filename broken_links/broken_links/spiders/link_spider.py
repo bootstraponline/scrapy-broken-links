@@ -37,14 +37,14 @@ class LinkSpiderSpider(CrawlSpider):
     def get_google_cookies(email, password):
         print "Getting google cookies for: ", email, " with password len: ", len(password)
 
-        service_login_url = 'https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1'
+        service_login_url = 'https://accounts.google.com/ServiceLogin'
         form_action_url = 'https://accounts.google.com/ServiceLoginAuth'
 
         browser = RoboBrowser()
         browser.open(service_login_url)
         form = browser.get_form(action=form_action_url)
-        fields = form.fields
 
+        fields = form.fields
         fields['Email'].value = email
         fields['Passwd'].value = password
 
@@ -98,6 +98,8 @@ class LinkSpiderSpider(CrawlSpider):
         if '.google.com/' in first_url:
             cookies_dict = self.get_google_cookies(self.arg_email, self.arg_password)
 
+        print "Cookies: ", cookies_dict
+
         # must set dont_filter on the start_urls requests otherwise
         # they will not be recorded in the items output because it'll
         # be considered a duplicate url.
@@ -105,7 +107,7 @@ class LinkSpiderSpider(CrawlSpider):
         for url in start_urls:
             # pass array of dictionaries to set cookies.
             # http://doc.scrapy.org/en/latest/topics/request-response.html#topics-request-response
-            yield scrapy.Request(url, cookies=[cookies_dict], dont_filter=True)
+            yield scrapy.Request(url, cookies=cookies_dict, dont_filter=True)
 
     # rule process_links callback
     def clean_links(self, links):

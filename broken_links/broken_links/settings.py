@@ -24,3 +24,6 @@ HTTPERROR_ALLOW_ALL = True
 AUTOTHROTTLE_ENABLED = True
 AUTOTHROTTLE_START_DELAY = 5 # default is 5
 AUTOTHROTTLE_MAX_DELAY = 10 * 60 # default is 60
+
+# http://doc.scrapy.org/en/latest/topics/downloader-middleware.html#std:setting-COOKIES_DEBUG
+COOKIES_DEBUG = True
