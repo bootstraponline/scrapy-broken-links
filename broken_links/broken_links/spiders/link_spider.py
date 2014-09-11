@@ -37,7 +37,12 @@ class LinkSpiderSpider(CrawlSpider):
     def get_google_cookies(email, password):
         print "Getting google cookies for: ", email, " with password len: ", len(password)
 
-        service_login_url = 'https://accounts.google.com/ServiceLogin'
+        # GALX=
+        #
+        # after successful login & navigation to sites
+        #
+        # jotxtok=
+        service_login_url = 'https://accounts.google.com/ServiceLogin?continue=https://sites.google.com'
         form_action_url = 'https://accounts.google.com/ServiceLoginAuth'
 
         browser = RoboBrowser()
