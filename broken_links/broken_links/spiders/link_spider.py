@@ -7,6 +7,9 @@ from broken_links.items import BrokenLinksItem
 
 import urllib2
 
+import requests
+from robobrowser import RoboBrowser
+
 # Follows urls on target domain and saves url, status, and referer.
 #
 # scrapy crawl link_spider -o items.json
@@ -29,6 +32,26 @@ class LinkSpiderSpider(CrawlSpider):
         for item in sitemap:
             results.append(item['loc'])
         return results
+
+    @staticmethod
+    def get_google_cookies(email, password):
+        print "Getting google cookies for: ", email, " with password len: ", len(password)
+
+        service_login_url = 'https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1'
+        form_action_url = 'https://accounts.google.com/ServiceLoginAuth'
+
+        browser = RoboBrowser()
+        browser.open(service_login_url)
+        form = browser.get_form(action=form_action_url)
+        fields = form.fields
+
+        fields['Email'].value = email
+        fields['Passwd'].value = password
+
+        browser.submit_form(form)
+        cookies = requests.utils.dict_from_cookiejar(browser.session.cookies)
+
+        return cookies
 
     # __init__ is called to get the spider name so avoid doing any extra work
     # in init such as downloading files.
@@ -62,16 +85,27 @@ class LinkSpiderSpider(CrawlSpider):
         if self.arg_start_urls.endswith('.xml'):
             print 'Sitemap detected!'
             start_urls = self.sitemap_to_array(self.arg_start_urls)
-        else:
+        elif self.arg_start_urls.endswith('.txt'):
             start_urls = self.remote_file_to_array(self.arg_start_urls)
+        else: # single url
+            start_urls = [self.arg_start_urls]
         print 'Start url count: ', len(start_urls)
-        print 'First url: ', start_urls[0]
+        first_url = start_urls[0]
+        print 'First url: ', first_url
+
+        cookies_dict = {}
+
+        if '.google.com/' in first_url:
+            cookies_dict = self.get_google_cookies(self.arg_email, self.arg_password)
+
         # must set dont_filter on the start_urls requests otherwise
         # they will not be recorded in the items output because it'll
         # be considered a duplicate url.
         # see https://github.com/scrapy/scrapy/blob/5daa14770b23da250ccfd4329899a1c3f669b1f3/scrapy/spider.py#L65
         for url in start_urls:
-            yield scrapy.Request(url, dont_filter=True)
+            # pass array of dictionaries to set cookies.
+            # http://doc.scrapy.org/en/latest/topics/request-response.html#topics-request-response
+            yield scrapy.Request(url, cookies=[cookies_dict], dont_filter=True)
 
     # rule process_links callback
     def clean_links(self, links):
