@@ -56,3 +56,8 @@ log.msg('------------------------------- Parsing: %s' % response.url, level=log.
 Args can be set on scraping hub
 
 ![](args_on_scrapinghub.png)
+
+Data retention
+
+  - Default is 30 days / last 30 jobs per spider
+  - Configurable in the Data Retention project settings
