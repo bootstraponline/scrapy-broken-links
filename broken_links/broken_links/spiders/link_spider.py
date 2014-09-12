@@ -7,9 +7,6 @@ from broken_links.items import BrokenLinksItem
 
 import urllib2
 
-import requests
-from robobrowser import RoboBrowser
-
 # Follows urls on target domain and saves url, status, and referer.
 #
 # scrapy crawl link_spider -o items.json
@@ -32,31 +29,6 @@ class LinkSpiderSpider(CrawlSpider):
         for item in sitemap:
             results.append(item['loc'])
         return results
-
-    @staticmethod
-    def get_google_cookies(email, password):
-        print "Getting google cookies for: ", email, " with password len: ", len(password)
-
-        # GALX=
-        #
-        # after successful login & navigation to sites
-        #
-        # jotxtok=
-        service_login_url = 'https://accounts.google.com/ServiceLogin?continue=https://sites.google.com'
-        form_action_url = 'https://accounts.google.com/ServiceLoginAuth'
-
-        browser = RoboBrowser()
-        browser.open(service_login_url)
-        form = browser.get_form(action=form_action_url)
-
-        fields = form.fields
-        fields['Email'].value = email
-        fields['Passwd'].value = password
-
-        browser.submit_form(form)
-        cookies = requests.utils.dict_from_cookiejar(browser.session.cookies)
-
-        return cookies
 
     # __init__ is called to get the spider name so avoid doing any extra work
     # in init such as downloading files.
@@ -98,13 +70,6 @@ class LinkSpiderSpider(CrawlSpider):
         first_url = start_urls[0]
         print 'First url: ', first_url
 
-        cookies_dict = {}
-
-        if '.google.com/' in first_url:
-            cookies_dict = self.get_google_cookies(self.arg_email, self.arg_password)
-
-        print "Cookies: ", cookies_dict
-
         # must set dont_filter on the start_urls requests otherwise
         # they will not be recorded in the items output because it'll
         # be considered a duplicate url.
@@ -112,7 +77,7 @@ class LinkSpiderSpider(CrawlSpider):
         for url in start_urls:
             # pass array of dictionaries to set cookies.
             # http://doc.scrapy.org/en/latest/topics/request-response.html#topics-request-response
-            yield scrapy.Request(url, cookies=cookies_dict, dont_filter=True)
+            yield scrapy.Request(url, dont_filter=True)
 
     # rule process_links callback
     def clean_links(self, links):
@@ -122,10 +87,24 @@ class LinkSpiderSpider(CrawlSpider):
             link.url = link.url.split('#')[0].split('?')[0]
             yield link
 
+    def authenticate_google(self, response):
+        # works on both /ServiceLogin and /AccountChooser
+        scrapy.FormRequest.from_response(
+            response,
+            formdata={'Email': self.arg_email, 'Passwd': self.arg_password},
+            callback='parse_item'
+        )
+
     # rule callback
     def parse_item(self, response):
-        item = BrokenLinksItem()
-        item['url'] = response.url
-        item['status'] = response.status
-        item['referer'] = response.request.headers['Referer']
-        yield item
+        # url requires authentication
+        url = response.url
+        requires_auth = url.startswith('https://accounts.google.com/ServiceLogin?') or url.startswith('https://accounts.google.com/AccountChooser')
+        if requires_auth:
+            self.authenticate_google(response)
+        else:
+            item = BrokenLinksItem()
+            item['url'] = url
+            item['status'] = response.status
+            item['referer'] = response.request.headers['Referer']
+            yield item
