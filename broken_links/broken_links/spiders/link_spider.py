@@ -101,7 +101,7 @@ class LinkSpiderSpider(CrawlSpider):
         url = response.url
         requires_auth = url.startswith('https://accounts.google.com/ServiceLogin?') or url.startswith('https://accounts.google.com/AccountChooser')
         if requires_auth:
-            self.authenticate_google(response)
+            yield self.authenticate_google(response)
         else:
             item = BrokenLinksItem()
             item['url'] = url
