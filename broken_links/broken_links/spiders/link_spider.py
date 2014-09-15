@@ -65,6 +65,7 @@ class LinkSpiderSpider(CrawlSpider):
             print 'Sitemap detected!'
             start_urls = self.sitemap_to_array(self.arg_start_urls)
         elif self.arg_start_urls.endswith('.txt'):
+            print 'Remote url list detected!'
             start_urls = self.remote_file_to_array(self.arg_start_urls)
         else: # single url
             start_urls = [self.arg_start_urls]
@@ -90,6 +91,7 @@ class LinkSpiderSpider(CrawlSpider):
             yield link
 
     def authenticate_google(self, response):
+        print "Authenticating for: ", response.url
         # works on both /ServiceLogin and /AccountChooser
         scrapy.FormRequest.from_response(
             response,
