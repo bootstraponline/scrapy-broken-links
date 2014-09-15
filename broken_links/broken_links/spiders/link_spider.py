@@ -44,6 +44,8 @@ class LinkSpiderSpider(CrawlSpider):
 
         # If a link matches multiple rules, the first rule wins.
         self.rules = (
+            # skip 'https://sites.google.com/site/_logout?secure=true'
+            Rule(LinkExtractor(deny='google\.com/site/_logout')),
             # If a link is within the target domain, follow it.
             Rule(LinkExtractor(allow_domains=[target_domain], unique=True),
                  callback='parse_item',
@@ -92,7 +94,8 @@ class LinkSpiderSpider(CrawlSpider):
         scrapy.FormRequest.from_response(
             response,
             formdata={'Email': self.arg_email, 'Passwd': self.arg_password},
-            callback='parse_item'
+            callback='parse_item',
+            dont_filter=True
         )
 
     # rule callback
