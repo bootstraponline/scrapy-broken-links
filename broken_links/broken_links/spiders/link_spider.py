@@ -40,14 +40,16 @@ class LinkSpiderSpider(CrawlSpider):
         # load target domain and then use it once to define the rules
         # target domain is a string value.
         target_domain = self.arg_target_domain
-        print 'Target domain: ', target_domain
+        target_domain = target_domain.replace('.', '\.')
+        print 'Target domain regex: ', target_domain
 
         # If a link matches multiple rules, the first rule wins.
         self.rules = (
             # skip 'https://sites.google.com/site/_logout?secure=true'
             Rule(LinkExtractor(deny=r'google\.com/site/_logout')),
             # If a link is within the target domain, follow it.
-            Rule(LinkExtractor(allow_domains=[target_domain], unique=True),
+            # allow domains doesn't appear to respect subdomains so use a regex allow.
+            Rule(LinkExtractor(allow=target_domain, unique=True),
                  callback='parse_item',
                  process_links='clean_links',
                  follow=True),
