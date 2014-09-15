@@ -88,26 +88,10 @@ class LinkSpiderSpider(CrawlSpider):
             link.url = link.url.split('#')[0].split('?')[0]
             yield link
 
-    def authenticate_google(self, response):
-        print "Authenticating for: ", response.url
-        # works on both /ServiceLogin and /AccountChooser
-        scrapy.FormRequest.from_response(
-            response,
-            formdata={'Email': self.arg_email, 'Passwd': self.arg_password},
-            callback='parse_item',
-            dont_filter=True
-        )
-
     # rule callback
     def parse_item(self, response):
-        # url requires authentication
-        url = response.url
-        requires_auth = url.startswith('https://accounts.google.com/ServiceLogin?') or url.startswith('https://accounts.google.com/AccountChooser')
-        if requires_auth:
-            yield self.authenticate_google(response)
-        else:
-            item = BrokenLinksItem()
-            item['url'] = url
-            item['status'] = response.status
-            item['referer'] = response.request.headers['Referer']
-            yield item
+        item = BrokenLinksItem()
+        item['url'] = response.url
+        item['status'] = response.status
+        item['referer'] = response.request.headers['Referer']
+        yield item
