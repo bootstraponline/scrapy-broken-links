@@ -45,7 +45,7 @@ class LinkSpiderSpider(CrawlSpider):
         # If a link matches multiple rules, the first rule wins.
         self.rules = (
             # skip 'https://sites.google.com/site/_logout?secure=true'
-            Rule(LinkExtractor(deny='google\.com/site/_logout')),
+            Rule(LinkExtractor(deny=r'google\.com/site/_logout')),
             # If a link is within the target domain, follow it.
             Rule(LinkExtractor(allow_domains=[target_domain], unique=True),
                  callback='parse_item',
