@@ -11,16 +11,34 @@ class LinkSpiderSpider(CrawlSpider):
     name = "link_spider"
 
     def start_requests(self):
-        self.arg_email = 'example@example.com'
+        # self.arg_email = 'example@example.com' # set via argument on scrapinghub.com
         self.arg_password = '..password..'
 
-        url_array = ['https://accounts.google.com/ServiceLogin?', 'https://sites.google.com/']
-        allow_regex_array = ["^" + re.escape(url) for url in url_array]
+        # url *must* start with the string
+        allow_urls = ['https://accounts.google.com/ServiceLogin?', 'https://sites.google.com/']
+        allow_regex_array = ["^" + re.escape(url) for url in allow_urls]
+
+        # allow partial matches, don't force the url to start with the string
+        deny_urls = ['/system/app/pages/recentChanges',
+                     '/system/app/pages/meta/',
+                     '/system/app/pages/removeAccess',
+                     '/system/app/pages/reportAbuse']
+        deny_regex_array = [re.escape(url) for url in deny_urls]
+
+        #
+        # must allow sitemap
+        # /system/app/pages/sitemap/hierarchy
+        #
+        # most other system app pages we want to deny.
 
         self.rules = [
-            Rule(LinkExtractor(allow=allow_regex_array),
+            Rule(LinkExtractor(allow=allow_regex_array, deny=deny_regex_array),
                  callback=self.parse_item,
-                 follow=True)
+                 follow=True),
+            # Don't follow any external domain links.
+            Rule(LinkExtractor(unique=True),
+                 callback=self.parse_item,
+                 follow=False),
         ]
         self._compile_rules()
 
@@ -49,4 +67,5 @@ class LinkSpiderSpider(CrawlSpider):
             item['url'] = url
             item['status'] = response.status
             item['referer'] = response.request.headers['Referer']
+            item['link_text'] = response.meta.get('link_text')
             yield item
