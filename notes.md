@@ -61,3 +61,8 @@ Data retention
 
   - Default is 30 days / last 30 jobs per spider
   - Configurable in the Data Retention project settings
+
+
+## login spider link
+
+[StackOverflow answer about authentication](http://stackoverflow.com/a/22569515)
