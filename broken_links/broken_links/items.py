@@ -13,3 +13,4 @@ class BrokenLinksItem(scrapy.Item):
     url = scrapy.Field()
     status = scrapy.Field()
     referer = scrapy.Field()
+    link_text = scrapy.Field()

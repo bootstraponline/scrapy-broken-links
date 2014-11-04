@@ -7,7 +7,9 @@ from broken_links.items import BrokenLinksItem
 
 import urllib2
 
-# Follows urls on target domain and saves url, status, and referer.
+# Follows urls on target domain and saves url, status, and referrer.
+#
+# note that target_domain must not have http://
 #
 # scrapy crawl link_spider -o items.json
 #                          -a arg_start_urls=url/to/start_urls.txt
@@ -49,11 +51,11 @@ class LinkSpiderSpider(CrawlSpider):
                  callback='parse_item',
                  process_links='clean_links',
                  follow=True),
-            # Don't follow any external domain links.
-            Rule(LinkExtractor(unique=True),
-                 callback='parse_item',
-                 process_links='clean_links',
-                 follow=False),
+            # Crawl external links and don't follow them
+            # Rule(LinkExtractor(unique=True),
+            #     callback='parse_item',
+            #     process_links='clean_links',
+            #     follow=False),
         )
         self._compile_rules()
 
@@ -94,4 +96,5 @@ class LinkSpiderSpider(CrawlSpider):
         item['url'] = response.url
         item['status'] = response.status
         item['referer'] = response.request.headers['Referer']
+        item['link_text'] = response.meta.get('link_text')
         yield item
