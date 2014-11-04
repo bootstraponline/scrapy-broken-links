@@ -2,25 +2,10 @@
 import scrapy
 from scrapy.contrib.linkextractors import LinkExtractor
 from scrapy.contrib.spiders import CrawlSpider, Rule
-from scrapy.utils.sitemap import Sitemap
 from broken_links.items import BrokenLinksItem
 
-import urllib2
-
-# Follows urls on target domain and saves url, status, and referrer.
-#
-# note that target_domain must not have http://
-#
-# scrapy crawl link_spider -o items.json
-#                          -a arg_start_urls=url/to/start_urls.txt
-#                          -a arg_target_domain=example.com
 class LinkSpiderSpider(CrawlSpider):
     name = "link_spider"
-
-    # __init__ is called to get the spider name so avoid doing any extra work
-    # in init such as downloading files.
-    #
-    # args are automatically made available to the spider.
 
     def start_requests(self):
         self.rules = (
