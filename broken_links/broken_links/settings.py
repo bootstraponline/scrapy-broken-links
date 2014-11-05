@@ -23,4 +23,4 @@ HTTPERROR_ALLOW_ALL = True
 # http://doc.scrapy.org/en/latest/topics/autothrottle.html
 AUTOTHROTTLE_ENABLED = True
 AUTOTHROTTLE_START_DELAY = 5 # default is 5
-AUTOTHROTTLE_MAX_DELAY = 10 * 60 # default is 60
+AUTOTHROTTLE_MAX_DELAY = 50 # default is 60
