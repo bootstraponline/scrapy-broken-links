@@ -92,9 +92,12 @@ class LinkSpiderSpider(CrawlSpider):
 
     # rule callback
     def parse_item(self, response):
+        # headers.get('Referer') doesn't error on None. 
+        # request.headers['Referer'] errors with KeyError: 'Referer' when undefined
         item = BrokenLinksItem()
         item['url'] = response.url
         item['status'] = response.status
-        item['referer'] = response.request.headers['Referer']
+        item['referer'] = response.request.headers.get('Referer')
         item['link_text'] = response.meta.get('link_text')
         yield item
+        
